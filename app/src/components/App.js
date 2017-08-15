@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <p className="App-intro">
-          Empty project
-        </p>
+        <Route exact path='/' render={() => (
+          <p className="App-intro">
+            Empty project
+          </p>
+        )} />
       </div>
     );
   }
