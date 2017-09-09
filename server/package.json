@@ -1,5 +1,5 @@
 {
-  "name": "reddit-clone-server",
+  "name": "reactnd-project-readable-server",
   "version": "0.0.1",
   "description": "A server for the Udacity Reddit Clone project for ReactND",
   "main": "index.js",
