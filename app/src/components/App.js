@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import PostList from './PostList';
+import ListContainer from './ListContainer';
 
 
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <Route exact path='/' component={PostList} />
-        </div>
-      </MuiThemeProvider>
+      <div>
+          <Route path='/' component={ListContainer} />
+      </div>
     );
   }
 }
