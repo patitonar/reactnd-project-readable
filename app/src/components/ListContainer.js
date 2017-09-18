@@ -19,51 +19,52 @@ class ListContainer extends Component {
     return (
       <div>
         <AppBar position="static">
-          <Toolbar >
-          {categories
-          && categories.length > 0 
-          && categories.map((category, i) => (
-            <Link 
-              to={category.path} 
-              key={i}
-              style={{textDecoration: 'none'}}>
-              <Button color="contrast">
-                {category.name}
-              </Button>
-            </Link>
-            ))}
+          <Toolbar>
+            {categories &&
+              categories.length > 0 &&
+              categories.map((category, i) => (
+                <Link
+                  to={category.path}
+                  key={i}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Button color="contrast">{category.name}</Button>
+                </Link>
+              ))}
           </Toolbar>
         </AppBar>
-        {categories
-        && categories.length > 0 
-        && categories.map((category, i) => (
-            <Route 
-              exact path={`/${category.path}`} 
+        {categories &&
+          categories.length > 0 &&
+          categories.map((category, i) => (
+            <Route
+              exact
+              path={`/${category.path}`}
               key={i}
               render={() => (
                 <PostList
-                  posts={category.path === baseCategory.path ? 
-                    posts : 
-                    posts.filter(post => post.category === category.path)}
+                  posts={
+                    category.path === baseCategory.path ? (
+                      posts
+                    ) : (
+                      posts.filter(post => post.category === category.path)
+                    )
+                  }
                 />
               )}
-            />  
-            )
-          )
-        }
+            />
+          ))}
       </div>
     );
   }
 }
 
-function mapStateToProps ({ posts, categories }) {
+function mapStateToProps({ posts, categories }) {
   return {
     posts,
     categories
-  }
+  };
 }
 
-export default connect(
-  mapStateToProps,
-  { fetchPosts, fetchCategories }
-)(ListContainer);
+export default connect(mapStateToProps, { fetchPosts, fetchCategories })(
+  ListContainer
+);

@@ -1,36 +1,30 @@
 const url = `http://localhost:5001`;
 
 const headers = {
-  'Authorization': 'auth'
+  Authorization: 'auth'
 };
 
 // Get Methods
 export const getCategories = () =>
-  fetch(`${url}/categories`, { headers })
-    .then(res => res.json());
+  fetch(`${url}/categories`, { headers }).then(res => res.json());
 
-export const getCategoryPosts = (category) =>
-  fetch(`${url}/${category}/posts`, { headers })
-    .then(res => res.json());
+export const getCategoryPosts = category =>
+  fetch(`${url}/${category}/posts`, { headers }).then(res => res.json());
 
 export const getPosts = () =>
-  fetch(`${url}/posts`, { headers })
-    .then(res => res.json());
+  fetch(`${url}/posts`, { headers }).then(res => res.json());
 
-export const getPost = (id) =>
-  fetch(`${url}/posts/${id}`, { headers })
-    .then(res => res.json());
+export const getPost = id =>
+  fetch(`${url}/posts/${id}`, { headers }).then(res => res.json());
 
-export const getComment = (id) =>
-  fetch(`${url}/comments/${id}`, { headers })
-    .then(res => res.json());
+export const getComment = id =>
+  fetch(`${url}/comments/${id}`, { headers }).then(res => res.json());
 
-export const getPostComments = (id) =>
-  fetch(`${url}/posts/${id}/comments`, { headers })
-    .then(res => res.json());
+export const getPostComments = id =>
+  fetch(`${url}/posts/${id}/comments`, { headers }).then(res => res.json());
 
 // Post Methods
-export const addPost = (post) =>
+export const addPost = post =>
   fetch(`${url}/posts`, {
     method: 'POST',
     headers: {
@@ -50,7 +44,7 @@ export const votePost = (id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json());
 
-export const addComment = (comment) =>
+export const addComment = comment =>
   fetch(`${url}/comments`, {
     method: 'POST',
     headers: {
@@ -92,7 +86,7 @@ export const editComment = (id, comment) =>
   }).then(res => res.json());
 
 // Delete Methods
-export const deletePost = (id) =>
+export const deletePost = id =>
   fetch(`${url}/posts/${id}`, {
     method: 'DELETE',
     headers: {
@@ -100,7 +94,7 @@ export const deletePost = (id) =>
     }
   }).then(res => res.json());
 
-export const deleteComment = (id) =>
+export const deleteComment = id =>
   fetch(`${url}/comments/${id}`, {
     method: 'DELETE',
     headers: {

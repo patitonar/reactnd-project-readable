@@ -8,19 +8,13 @@ export const receivePosts = payload => ({
   payload
 });
 
-export const fetchPosts = () => dispatch => (
-  Api
-    .getPosts()
-    .then(payload => dispatch(receivePosts(payload)))
-);
+export const fetchPosts = () => dispatch =>
+  Api.getPosts().then(payload => dispatch(receivePosts(payload)));
 
 export const receiveCategories = payload => ({
   type: FETCH_CATEGORIES,
   payload
 });
 
-export const fetchCategories = () => dispatch => (
-  Api
-    .getCategories()
-    .then(payload => dispatch(receiveCategories(payload)))
-);
+export const fetchCategories = () => dispatch =>
+  Api.getCategories().then(payload => dispatch(receiveCategories(payload)));
