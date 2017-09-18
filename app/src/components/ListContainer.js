@@ -65,6 +65,7 @@ function mapStateToProps({ posts, categories }) {
   };
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchCategories })(
-  ListContainer
-);
+export default connect(mapStateToProps, {
+  fetchPosts,
+  fetchCategories
+})(ListContainer);
