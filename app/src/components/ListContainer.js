@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import { fetchPosts, fetchCategories } from '../actions';
+import {
+  fetchPosts,
+  fetchCategories,
+  orderByVoteScore,
+  orderByTimeStamp
+} from '../actions';
 import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
+import { sortByVoteScore, sortByTimeStamp } from '../utils/sort';
+import { VOTE_ORDER } from '../utils/config';
 
 class ListContainer extends Component {
   componentDidMount() {
     this.props.fetchPosts();
     this.props.fetchCategories();
+    this.props.orderByVoteScore();
   }
 
   render() {
@@ -58,14 +66,19 @@ class ListContainer extends Component {
   }
 }
 
-function mapStateToProps({ posts, categories }) {
+function mapStateToProps({ posts, categories, order }) {
+  console.log('order', order);
   return {
-    posts,
-    categories
+    posts:
+      order === VOTE_ORDER ? sortByVoteScore(posts) : sortByTimeStamp(posts),
+    categories,
+    order
   };
 }
 
 export default connect(mapStateToProps, {
   fetchPosts,
-  fetchCategories
+  fetchCategories,
+  orderByVoteScore,
+  orderByTimeStamp
 })(ListContainer);
