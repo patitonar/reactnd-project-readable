@@ -9,7 +9,11 @@ const PostList = ({ posts }) => {
         posts.map((post, i) => (
           <div key={i}>
             <ListItem divider>
-              <ListItemText primary={post.title} secondary={post.author} />
+              <div>{post.voteScore}</div>
+              <ListItemText
+                primary={post.title}
+                secondary={`Author: ${post.author} - Comments: ${post.numComments}`}
+              />
             </ListItem>
           </div>
         ))}
