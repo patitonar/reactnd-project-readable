@@ -1,5 +1,4 @@
 import * as Api from '../utils/Api';
-import { VOTE_ORDER, TIMESTAMP_ORDER } from '../utils/config';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
@@ -24,14 +23,8 @@ export const fetchComments = postId => dispatch =>
     dispatch(receive(FETCH_COMMENTS, payload))
   );
 
-export const orderByVoteScore = () => dispatch =>
+export const orderBy = newOrder => dispatch =>
   dispatch({
     type: UPDATE_ORDER,
-    value: VOTE_ORDER
-  });
-
-export const orderByTimeStamp = () => dispatch =>
-  dispatch({
-    type: UPDATE_ORDER,
-    value: TIMESTAMP_ORDER
+    value: newOrder
   });

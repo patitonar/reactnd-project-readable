@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import {
-  fetchPosts,
-  fetchCategories,
-  orderByVoteScore,
-  orderByTimeStamp
-} from '../actions';
+import { fetchPosts, fetchCategories, orderBy } from '../actions';
 import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
-import { sortByVoteScore, sortByTimeStamp } from '../utils/sort';
-import { VOTE_ORDER } from '../utils/config';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+import Input from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import { sortBy } from '../utils/sort';
+import { VOTE_ORDER, TIMESTAMP_ORDER } from '../utils/config';
 
 class ListContainer extends Component {
   componentDidMount() {
     this.props.fetchPosts();
     this.props.fetchCategories();
-    this.props.orderByVoteScore();
   }
 
+  handleOrderChange = event => this.props.orderBy(event.target.value);
+
   render() {
-    const { posts, categories } = this.props;
+    const { posts, categories, order } = this.props;
     return (
       <div>
         <AppBar position="static">
@@ -39,6 +39,17 @@ class ListContainer extends Component {
                   <Button color="contrast">{category.name}</Button>
                 </Link>
               ))}
+            <FormControl>
+              <Select
+                style={{ color: 'white' }}
+                value={order}
+                onChange={this.handleOrderChange}
+                input={<Input id="order-tag" />}
+              >
+                <MenuItem value={VOTE_ORDER}>Vote Score</MenuItem>
+                <MenuItem value={TIMESTAMP_ORDER}>Time</MenuItem>
+              </Select>
+            </FormControl>
           </Toolbar>
         </AppBar>
         {categories &&
@@ -67,10 +78,8 @@ class ListContainer extends Component {
 }
 
 function mapStateToProps({ posts, categories, order }) {
-  console.log('order', order);
   return {
-    posts:
-      order === VOTE_ORDER ? sortByVoteScore(posts) : sortByTimeStamp(posts),
+    posts: sortBy(order, posts),
     categories,
     order
   };
@@ -79,6 +88,5 @@ function mapStateToProps({ posts, categories, order }) {
 export default connect(mapStateToProps, {
   fetchPosts,
   fetchCategories,
-  orderByVoteScore,
-  orderByTimeStamp
+  orderBy
 })(ListContainer);
