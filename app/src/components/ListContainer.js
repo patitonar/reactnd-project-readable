@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import { fetchPosts, fetchCategories, orderBy } from '../actions';
+import { fetchPosts, fetchCategories, orderBy, deletePost } from '../actions';
 import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import AppBar from 'material-ui/AppBar';
@@ -22,6 +22,8 @@ class ListContainer extends Component {
   }
 
   handleOrderChange = event => this.props.orderBy(event.target.value);
+
+  handleDelete = post => this.props.deletePost(post);
 
   render() {
     const { posts, categories, order } = this.props;
@@ -69,6 +71,7 @@ class ListContainer extends Component {
                       posts.filter(post => post.category === category.path)
                     )
                   }
+                  handleDelete={this.handleDelete}
                 />
               )}
             />
@@ -99,5 +102,6 @@ function mapStateToProps({ posts, categories, order }) {
 export default connect(mapStateToProps, {
   fetchPosts,
   fetchCategories,
-  orderBy
+  orderBy,
+  deletePost
 })(ListContainer);

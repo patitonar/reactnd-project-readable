@@ -7,7 +7,7 @@ import {
   ArrowDownward
 } from 'material-ui-icons';
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, handleDelete }) => {
   return (
     <List>
       {posts &&
@@ -25,7 +25,7 @@ const PostList = ({ posts }) => {
                 secondary={`Author: ${post.author} - Comments: ${post.numComments}`}
               />
               <Edit />
-              <DeleteForever />
+              <DeleteForever onClick={() => handleDelete(post)} />
             </ListItem>
           </div>
         ))}
