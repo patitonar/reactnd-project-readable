@@ -10,7 +10,7 @@ const defaultData = {
     title: 'Udacity is the best place to learn React',
     body: 'Everyone says so after all.',
     author: 'thingtwo',
-    category: 'react',
+    category: 'udacity',
     voteScore: 6,
     deleted: false
   },
@@ -22,6 +22,16 @@ const defaultData = {
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
+    deleted: false
+  },
+  '99i6ok3ym7mf1p33ln99': {
+    id: '99i6ok3ym7mf1p33ln99',
+    timestamp: 1468479632091,
+    title: 'Learn React in 2 minutes!',
+    body: 'Lol. It takes more than 2 minutes to learn technology.',
+    author: 'thingone',
+    category: 'react',
+    voteScore: 0,
     deleted: false
   }
 };
