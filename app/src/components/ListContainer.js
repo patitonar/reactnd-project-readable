@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { fetchPosts, fetchCategories, orderBy, deletePost } from '../actions';
-import PostList from './PostList';
+import {
+  fetchPosts,
+  fetchCategories,
+  orderBy,
+  deletePost,
+  votePost
+} from '../actions';
+import GenericList from './GenericList';
 import CategoryBar from './CategoryBar';
 import { baseCategory } from '../utils/config';
 import { sortBy } from '../utils/sort';
@@ -17,6 +23,8 @@ class ListContainer extends Component {
   handleOrderChange = event => this.props.orderBy(event.target.value);
 
   handleDelete = post => this.props.deletePost(post);
+
+  handlePostVote = (post, option) => this.props.votePost(post.id, option);
 
   render() {
     const { posts, categories, order } = this.props;
@@ -35,14 +43,15 @@ class ListContainer extends Component {
               path={`/${category.path}`}
               key={i}
               render={() => (
-                <PostList
-                  posts={
+                <GenericList
+                  items={
                     category.path === baseCategory.path ? (
                       posts
                     ) : (
                       posts.filter(post => post.category === category.path)
                     )
                   }
+                  handleVote={this.handlePostVote}
                   handleDelete={this.handleDelete}
                 />
               )}
@@ -75,5 +84,6 @@ export default connect(mapStateToProps, {
   fetchPosts,
   fetchCategories,
   orderBy,
-  deletePost
+  deletePost,
+  votePost
 })(ListContainer);
