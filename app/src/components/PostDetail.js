@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions
-} from 'material-ui/Card';
+import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import VoteScore from './VoteScore';
 import { Edit, DeleteForever } from 'material-ui-icons';
-import IconButton from 'material-ui/IconButton';
 import moment from 'moment';
+import { getPost, fetchComments } from '../actions';
 
 class PostDetail extends Component {
+  componentDidMount() {
+    const { postId } = this.props.match.params;
+
+    this.props.getPost(postId);
+    this.props.fetchComments(postId);
+  }
+
   render() {
     const { post } = this.props;
     return (
@@ -63,4 +65,4 @@ function mapStateToProps({ posts }, { match }) {
   };
 }
 
-export default connect(mapStateToProps)(PostDetail);
+export default connect(mapStateToProps, { getPost, fetchComments })(PostDetail);

@@ -22,7 +22,7 @@ export const fetchCategories = () => dispatch =>
 
 export const fetchComments = postId => dispatch =>
   Api.getPostComments(postId).then(payload =>
-    dispatch(receive(FETCH_COMMENTS, payload))
+    dispatch(receive(FETCH_COMMENTS, { postId, payload }))
   );
 
 export const orderBy = newOrder => dispatch =>
@@ -45,3 +45,6 @@ export const votePost = (id, option) => dispatch =>
   Api.votePost(id, option).then(payload =>
     dispatch(receive(UPDATE_POST, payload))
   );
+
+export const getPost = id => dispatch =>
+  Api.getPost(id).then(payload => dispatch(receive(UPDATE_POST, payload)));
