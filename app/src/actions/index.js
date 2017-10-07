@@ -6,6 +6,7 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 
 export const receive = (type, payload) => ({
   type,
@@ -48,3 +49,8 @@ export const votePost = (id, option) => dispatch =>
 
 export const getPost = id => dispatch =>
   Api.getPost(id).then(payload => dispatch(receive(UPDATE_POST, payload)));
+
+export const voteComment = (id, option) => dispatch =>
+  Api.voteComment(id, option).then(payload =>
+    dispatch(receive(UPDATE_COMMENT, payload))
+  );

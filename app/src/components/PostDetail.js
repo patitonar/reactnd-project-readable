@@ -6,7 +6,13 @@ import Typography from 'material-ui/Typography';
 import VoteScore from './VoteScore';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import moment from 'moment';
-import { getPost, fetchComments, deletePost } from '../actions';
+import {
+  getPost,
+  fetchComments,
+  deletePost,
+  votePost,
+  voteComment
+} from '../actions';
 import GenericList from './GenericList';
 import { sortBy } from '../utils/sort';
 
@@ -27,6 +33,11 @@ class PostDetail extends Component {
     this.setState({ fireRedirect: true });
   };
 
+  handlePostVote = (post, option) => this.props.votePost(post.id, option);
+
+  handleCommentVote = (comment, option) =>
+    this.props.voteComment(comment.id, option);
+
   render() {
     const { post, comments } = this.props;
     const { fireRedirect } = this.state;
@@ -44,7 +55,7 @@ class PostDetail extends Component {
                   paddingRight: 16
                 }}
               >
-                <VoteScore item={post} handleVote={() => {}} />
+                <VoteScore item={post} handleVote={this.handlePostVote} />
                 <CardHeader
                   title={post.title}
                   subheader={`Sent ${moment(post.timestamp).format(
@@ -74,7 +85,7 @@ class PostDetail extends Component {
                 <CardHeader title={`${post.numComments} comments`} />
                 <GenericList
                   items={comments}
-                  handleVote={() => {}}
+                  handleVote={this.handleCommentVote}
                   handleDelete={() => {}}
                 />
               </Card>
@@ -93,6 +104,10 @@ function mapStateToProps({ posts, comments }, { match }) {
   };
 }
 
-export default connect(mapStateToProps, { getPost, fetchComments, deletePost })(
-  PostDetail
-);
+export default connect(mapStateToProps, {
+  getPost,
+  fetchComments,
+  deletePost,
+  votePost,
+  voteComment
+})(PostDetail);
