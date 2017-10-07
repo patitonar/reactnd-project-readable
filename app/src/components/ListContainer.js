@@ -45,11 +45,9 @@ class ListContainer extends Component {
               render={() => (
                 <GenericList
                   items={
-                    category.path === baseCategory.path ? (
-                      posts
-                    ) : (
-                      posts.filter(post => post.category === category.path)
-                    )
+                    category.path === baseCategory.path
+                      ? posts
+                      : posts.filter(post => post.category === category.path)
                   }
                   handleVote={this.handlePostVote}
                   handleDelete={this.handleDelete}
@@ -74,7 +72,7 @@ class ListContainer extends Component {
 
 function mapStateToProps({ posts, categories, order }) {
   return {
-    posts: sortBy(order, posts),
+    posts: sortBy(posts, order),
     categories,
     order
   };

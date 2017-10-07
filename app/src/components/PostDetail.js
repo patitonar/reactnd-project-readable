@@ -7,6 +7,8 @@ import VoteScore from './VoteScore';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import moment from 'moment';
 import { getPost, fetchComments, deletePost } from '../actions';
+import GenericList from './GenericList';
+import { sortBy } from '../utils/sort';
 
 class PostDetail extends Component {
   state = {
@@ -26,7 +28,7 @@ class PostDetail extends Component {
   };
 
   render() {
-    const { post } = this.props;
+    const { post, comments } = this.props;
     const { fireRedirect } = this.state;
     return (
       <div>
@@ -37,7 +39,9 @@ class PostDetail extends Component {
               <div
                 style={{
                   display: 'flex',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  paddingLeft: 16,
+                  paddingRight: 16
                 }}
               >
                 <VoteScore item={post} handleVote={() => {}} />
@@ -63,14 +67,29 @@ class PostDetail extends Component {
             </Card>
           </div>
         )}
+        {post &&
+          comments && (
+            <div>
+              <Card style={{ padding: 5, margin: 5 }}>
+                <CardHeader title={`${post.numComments} comments`} />
+                <GenericList
+                  items={comments}
+                  handleVote={() => {}}
+                  handleDelete={() => {}}
+                />
+              </Card>
+            </div>
+          )}
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }, { match }) {
+function mapStateToProps({ posts, comments }, { match }) {
+  console.log('comments', comments);
   return {
-    post: posts.filter(post => post.id === match.params.postId)[0]
+    post: posts.filter(post => post.id === match.params.postId)[0],
+    comments: sortBy(comments[match.params.postId])
   };
 }
 
