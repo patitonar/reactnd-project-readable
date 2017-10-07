@@ -35,7 +35,6 @@ const Content = ({ item }) => (
 );
 
 const GenericList = ({ items, handleDelete, handleVote }) => {
-  console.log('On genericList', items);
   return (
     <List>
       {items &&

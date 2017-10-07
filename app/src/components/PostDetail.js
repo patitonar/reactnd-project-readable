@@ -11,7 +11,8 @@ import {
   fetchComments,
   deletePost,
   votePost,
-  voteComment
+  voteComment,
+  deleteComment
 } from '../actions';
 import GenericList from './GenericList';
 import { sortBy } from '../utils/sort';
@@ -23,7 +24,6 @@ class PostDetail extends Component {
 
   componentDidMount() {
     const { postId } = this.props.match.params;
-
     this.props.getPost(postId);
     this.props.fetchComments(postId);
   }
@@ -37,6 +37,8 @@ class PostDetail extends Component {
 
   handleCommentVote = (comment, option) =>
     this.props.voteComment(comment.id, option);
+
+  handleCommentDelete = comment => this.props.deleteComment(comment);
 
   render() {
     const { post, comments } = this.props;
@@ -86,7 +88,7 @@ class PostDetail extends Component {
                 <GenericList
                   items={comments}
                   handleVote={this.handleCommentVote}
-                  handleDelete={() => {}}
+                  handleDelete={this.handleCommentDelete}
                 />
               </Card>
             </div>
@@ -97,7 +99,6 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps({ posts, comments }, { match }) {
-  console.log('comments', comments);
   return {
     post: posts.filter(post => post.id === match.params.postId)[0],
     comments: sortBy(comments[match.params.postId])
@@ -109,5 +110,6 @@ export default connect(mapStateToProps, {
   fetchComments,
   deletePost,
   votePost,
-  voteComment
+  voteComment,
+  deleteComment
 })(PostDetail);
