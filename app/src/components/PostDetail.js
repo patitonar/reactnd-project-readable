@@ -58,10 +58,7 @@ class PostDetail extends Component {
                 </div>
               </div>
               <CardContent>
-                <Typography paragraph>
-                  Heat 1/2 cup of the broth in a pot until simmering, add
-                  saffron and set aside for 10 minutes.
-                </Typography>
+                <Typography paragraph>{post.body}</Typography>
               </CardContent>
             </Card>
           </div>
