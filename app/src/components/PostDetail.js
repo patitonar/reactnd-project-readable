@@ -16,6 +16,7 @@ import {
 } from '../actions';
 import GenericList from './GenericList';
 import { sortBy } from '../utils/sort';
+import CommentForm from './CommentForm';
 
 class PostDetail extends Component {
   state = {
@@ -90,6 +91,7 @@ class PostDetail extends Component {
                   handleVote={this.handleCommentVote}
                   handleDelete={this.handleCommentDelete}
                 />
+                <CommentForm />
               </Card>
             </div>
           )}
