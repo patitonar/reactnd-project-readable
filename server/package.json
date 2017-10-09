@@ -3,12 +3,7 @@
   "version": "0.0.1",
   "description": "A server for the Udacity Reddit Clone project for ReactND",
   "main": "index.js",
-  "keywords": [
-    "udacity",
-    "redux",
-    "readable",
-    "react"
-  ],
+  "keywords": ["udacity", "redux", "readable", "react"],
   "author": "David Harris",
   "license": "ISC",
   "dependencies": {
@@ -17,5 +12,8 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "clone": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
