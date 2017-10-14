@@ -12,7 +12,8 @@ import {
   deletePost,
   votePost,
   voteComment,
-  deleteComment
+  deleteComment,
+  addComment
 } from '../actions';
 import GenericList from './GenericList';
 import { sortBy } from '../utils/sort';
@@ -42,7 +43,7 @@ class PostDetail extends Component {
   handleCommentDelete = comment => this.props.deleteComment(comment);
 
   render() {
-    const { post, comments } = this.props;
+    const { post, comments, addComment } = this.props;
     const { fireRedirect } = this.state;
     return (
       <div>
@@ -91,7 +92,7 @@ class PostDetail extends Component {
                   handleVote={this.handleCommentVote}
                   handleDelete={this.handleCommentDelete}
                 />
-                <CommentForm />
+                <CommentForm post={post} addComment={addComment} />
               </Card>
             </div>
           )}
@@ -113,5 +114,6 @@ export default connect(mapStateToProps, {
   deletePost,
   votePost,
   voteComment,
-  deleteComment
+  deleteComment,
+  addComment
 })(PostDetail);
