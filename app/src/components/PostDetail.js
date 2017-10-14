@@ -86,13 +86,15 @@ class PostDetail extends Component {
           comments && (
             <div>
               <Card style={{ padding: 5, margin: 5 }}>
+                <CommentForm post={post} addComment={addComment} />
+              </Card>
+              <Card style={{ padding: 5, margin: 5 }}>
                 <CardHeader title={`${post.numComments} comments`} />
                 <GenericList
                   items={comments}
                   handleVote={this.handleCommentVote}
                   handleDelete={this.handleCommentDelete}
                 />
-                <CommentForm post={post} addComment={addComment} />
               </Card>
             </div>
           )}

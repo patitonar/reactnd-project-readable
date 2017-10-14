@@ -12,7 +12,6 @@ import GenericList from './GenericList';
 import CategoryBar from './CategoryBar';
 import { baseCategory } from '../utils/config';
 import { sortBy } from '../utils/sort';
-import { AddCircle } from 'material-ui-icons';
 
 class ListContainer extends Component {
   componentDidMount() {
@@ -55,16 +54,6 @@ class ListContainer extends Component {
               )}
             />
           ))}
-        <AddCircle
-          style={{
-            position: 'fixed',
-            right: 25,
-            bottom: 25,
-            width: 50,
-            height: 50,
-            fill: '#3f51b5'
-          }}
-        />
       </div>
     );
   }
