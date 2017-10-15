@@ -8,6 +8,10 @@ import Card from 'material-ui/Card';
 
 const timeFormat = 'Do MMM YYYY';
 
+const EditButton = ({ item }) => (
+  <div>{item.parentId ? <Edit /> : <Edit />}</div>
+);
+
 const Content = ({ item }) => (
   <div style={{ paddingLeft: 10 }}>
     {item.parentId ? (
@@ -59,7 +63,7 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
                     }}
                   />
                   <div>
-                    <Edit />
+                    <EditButton item={item} />
                     <DeleteForever onClick={() => handleDelete(item)} />
                   </div>
                 </div>
