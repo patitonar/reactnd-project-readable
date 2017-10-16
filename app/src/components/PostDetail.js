@@ -15,7 +15,7 @@ import {
   deleteComment,
   addComment
 } from '../actions';
-import GenericList from './GenericList';
+import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
 
@@ -84,7 +84,7 @@ class PostDetail extends Component {
               </Card>
               <Card style={{ padding: 5, margin: 5 }}>
                 <CardHeader title={`${post.numComments} comments`} />
-                <GenericList
+                <CommentList
                   items={comments}
                   handleVote={this.handleCommentVote}
                   handleDelete={this.handleCommentDelete}

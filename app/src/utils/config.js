@@ -7,3 +7,4 @@ export const TIMESTAMP_ORDER = 'TIMESTAMP_ORDER';
 export const defaultOrder = VOTE_ORDER;
 export const upVote = 'upVote';
 export const downVote = 'downVote';
+export const timeFormat = 'Do MMM YYYY';

@@ -8,7 +8,7 @@ import {
   deletePost,
   votePost
 } from '../actions';
-import GenericList from './GenericList';
+import PostList from './PostList';
 import CategoryBar from './CategoryBar';
 import { baseCategory } from '../utils/config';
 import { sortBy } from '../utils/sort';
@@ -42,7 +42,7 @@ class ListContainer extends Component {
               path={`/${category.path}`}
               key={i}
               render={() => (
-                <GenericList
+                <PostList
                   items={
                     category.path === baseCategory.path
                       ? posts

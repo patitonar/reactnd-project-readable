@@ -2,44 +2,22 @@ import React from 'react';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import VoteScore from './VoteScore';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Card from 'material-ui/Card';
-
-const timeFormat = 'Do MMM YYYY';
-
-const EditButton = ({ item }) => (
-  <div>{item.parentId ? <Edit /> : <Edit />}</div>
-);
+import { timeFormat } from '../utils/config';
 
 const Content = ({ item }) => (
   <div style={{ paddingLeft: 10 }}>
-    {item.parentId ? (
-      <ListItemText
-        primary={item.body}
-        secondary={`${moment(item.timestamp).format(
-          timeFormat
-        )} - Author: ${item.author}`}
-      />
-    ) : (
-      <ListItemText
-        primary={
-          <Link
-            to={`/${item.category}/${item.id}`}
-            style={{ textDecoration: 'none' }}
-          >
-            {item.title}
-          </Link>
-        }
-        secondary={`${moment(item.timestamp).format(
-          timeFormat
-        )} - Author: ${item.author} - Comments: ${item.numComments}`}
-      />
-    )}
+    <ListItemText
+      primary={item.body}
+      secondary={`${moment(item.timestamp).format(
+        timeFormat
+      )} - Author: ${item.author}`}
+    />
   </div>
 );
 
-const GenericList = ({ items, handleDelete, handleVote }) => {
+const CommentList = ({ items, handleDelete, handleVote }) => {
   return (
     <List>
       {items &&
@@ -63,7 +41,7 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
                     }}
                   />
                   <div>
-                    <EditButton item={item} />
+                    <Edit />
                     <DeleteForever onClick={() => handleDelete(item)} />
                   </div>
                 </div>
@@ -75,4 +53,4 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
   );
 };
 
-export default GenericList;
+export default CommentList;
