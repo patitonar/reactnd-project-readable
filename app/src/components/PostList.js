@@ -13,7 +13,7 @@ const Content = ({ item }) => (
       primary={
         <Link
           to={`/${item.category}/${item.id}`}
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none', color: 'black' }}
         >
           {item.title}
         </Link>
@@ -49,7 +49,12 @@ const PostList = ({ items, handleDelete, handleVote }) => {
                     }}
                   />
                   <div>
-                    <Edit />
+                    <Link
+                      to={`post/edit/${item.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      <Edit />
+                    </Link>
                     <DeleteForever onClick={() => handleDelete(item)} />
                   </div>
                 </div>

@@ -16,10 +16,12 @@ import {
 import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
+import { Link, Redirect } from 'react-router-dom';
 
 class PostDetail extends Component {
   state = {
-    editComment: null
+    editComment: null,
+    deleted: false
   };
 
   componentDidMount() {
@@ -30,6 +32,7 @@ class PostDetail extends Component {
 
   handleDelete = post => {
     this.props.deletePost(post);
+    this.setState({ deleted: true });
   };
 
   handlePostVote = (post, option) => this.props.votePost(post.id, option);
@@ -45,7 +48,12 @@ class PostDetail extends Component {
 
   render() {
     const { post, comments } = this.props;
-    const { editComment } = this.state;
+    const { editComment, deleted } = this.state;
+
+    if (deleted) {
+      return <Redirect to={'/'} />;
+    }
+
     return (
       <div>
         {post && (
@@ -72,7 +80,12 @@ class PostDetail extends Component {
                   }}
                 />
                 <div>
-                  <Edit />
+                  <Link
+                    to={`/post/edit/${post.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    <Edit />
+                  </Link>
                   <DeleteForever onClick={() => this.handleDelete(post)} />
                 </div>
               </div>

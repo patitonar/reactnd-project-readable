@@ -27,6 +27,7 @@ class CommentForm extends Component {
       updateComment,
       addComment
     } = this.props;
+
     if (comment) {
       const updatedComment = {
         ...comment,

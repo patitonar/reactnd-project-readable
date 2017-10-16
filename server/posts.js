@@ -93,7 +93,8 @@ function add(token, post) {
       author: post.author,
       category: post.category,
       voteScore: 1,
-      deleted: false
+      deleted: false,
+      numComments: 0
     };
 
     res(posts[post.id]);

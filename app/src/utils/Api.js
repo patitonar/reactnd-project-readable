@@ -65,8 +65,8 @@ export const voteComment = (id, option) =>
   }).then(res => res.json());
 
 // Put Methods
-export const editPost = (id, post) =>
-  fetch(`${url}/posts/${id}`, {
+export const editPost = post =>
+  fetch(`${url}/posts/${post.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
