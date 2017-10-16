@@ -72,3 +72,8 @@ export const addComment = comment => dispatch =>
       payload: res
     });
   });
+
+export const updateComment = comment => dispatch =>
+  Api.editComment(comment).then(payload =>
+    dispatch(receive(UPDATE_COMMENT, payload))
+  );

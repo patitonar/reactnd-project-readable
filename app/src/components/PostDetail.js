@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import VoteScore from './VoteScore';
@@ -12,14 +11,17 @@ import {
   deletePost,
   votePost,
   voteComment,
-  deleteComment,
-  addComment
+  deleteComment
 } from '../actions';
 import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
 
 class PostDetail extends Component {
+  state = {
+    editComment: null
+  };
+
   componentDidMount() {
     const { postId } = this.props.match.params;
     this.props.getPost(postId);
@@ -37,11 +39,15 @@ class PostDetail extends Component {
 
   handleCommentDelete = comment => this.props.deleteComment(comment);
 
+  handleEditButton = comment => this.setState({ editComment: comment });
+
+  handleFinishEdit = () => this.setState({ editComment: null });
+
   render() {
-    const { post, comments, addComment } = this.props;
+    const { post, comments } = this.props;
+    const { editComment } = this.state;
     return (
       <div>
-        {!post && <Redirect to={'/'} />}
         {post && (
           <div>
             <Card style={{ padding: 5, margin: 5 }}>
@@ -80,7 +86,7 @@ class PostDetail extends Component {
           comments && (
             <div>
               <Card style={{ padding: 5, margin: 5 }}>
-                <CommentForm post={post} addComment={addComment} />
+                <CommentForm post={post} />
               </Card>
               <Card style={{ padding: 5, margin: 5 }}>
                 <CardHeader title={`${post.numComments} comments`} />
@@ -88,6 +94,9 @@ class PostDetail extends Component {
                   items={comments}
                   handleVote={this.handleCommentVote}
                   handleDelete={this.handleCommentDelete}
+                  handleEditButton={this.handleEditButton}
+                  editComment={editComment}
+                  handleFinishEdit={this.handleFinishEdit}
                 />
               </Card>
             </div>
@@ -110,6 +119,5 @@ export default connect(mapStateToProps, {
   deletePost,
   votePost,
   voteComment,
-  deleteComment,
-  addComment
+  deleteComment
 })(PostDetail);

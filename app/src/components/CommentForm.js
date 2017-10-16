@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { v4 } from 'uuid';
+import { connect } from 'react-redux';
+import { addComment, updateComment } from '../actions';
 
 class CommentForm extends Component {
   state = {
-    author: '',
-    body: ''
+    author: this.props.comment ? this.props.comment.author : '',
+    body: this.props.comment ? this.props.comment.body : ''
   };
 
   handleChange = name => event => {
@@ -18,20 +20,39 @@ class CommentForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { post, addComment } = this.props;
-    const newComment = {
-      id: v4(),
-      parentId: post.id,
-      timestamp: Date.now(),
-      author: this.state.author,
-      body: this.state.body
-    };
+    const {
+      comment,
+      handleFinishEdit,
+      post,
+      updateComment,
+      addComment
+    } = this.props;
+    if (comment) {
+      const updatedComment = {
+        ...comment,
+        timestamp: Date.now(),
+        author: this.state.author,
+        body: this.state.body
+      };
+      updateComment(updatedComment);
+      handleFinishEdit();
+    } else {
+      const newComment = {
+        id: v4(),
+        parentId: post.id,
+        timestamp: Date.now(),
+        author: this.state.author,
+        body: this.state.body
+      };
 
-    addComment(newComment);
+      addComment(newComment);
+    }
+
     this.setState({ author: '', body: '' });
   };
 
   render() {
+    const { comment, handleFinishEdit } = this.props;
     return (
       <div
         style={{
@@ -83,10 +104,21 @@ class CommentForm extends Component {
           >
             Save
           </Button>
+          {comment && (
+            <Button
+              style={{
+                maxWidth: 400,
+                marginBottom: 20
+              }}
+              onClick={handleFinishEdit}
+            >
+              Cancel
+            </Button>
+          )}
         </form>
       </div>
     );
   }
 }
 
-export default CommentForm;
+export default connect(null, { addComment, updateComment })(CommentForm);

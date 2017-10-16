@@ -72,17 +72,17 @@ export const editPost = (id, post) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ post })
+    body: JSON.stringify(post)
   }).then(res => res.json());
 
-export const editComment = (id, comment) =>
-  fetch(`${url}/comments/${id}`, {
+export const editComment = comment =>
+  fetch(`${url}/comments/${comment.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ comment })
+    body: JSON.stringify(comment)
   }).then(res => res.json());
 
 // Delete Methods
