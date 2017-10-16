@@ -17,8 +17,20 @@ import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
 import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class PostDetail extends Component {
+  static propTypes = {
+    post: PropTypes.object,
+    comments: PropTypes.array,
+    getPost: PropTypes.func.isRequired,
+    fetchComments: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    votePost: PropTypes.func.isRequired,
+    voteComment: PropTypes.func.isRequired,
+    deleteComment: PropTypes.func.isRequired
+  };
+
   state = {
     editComment: null,
     deleted: false

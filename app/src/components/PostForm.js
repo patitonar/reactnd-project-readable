@@ -11,8 +11,16 @@ import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import { baseCategory } from '../utils/config';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class PostForm extends Component {
+  static propTypes = {
+    post: PropTypes.object,
+    categories: PropTypes.array,
+    addPost: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired
+  };
+
   state = {
     author: this.props.post ? this.props.post.author : '',
     title: this.props.post ? this.props.post.title : '',
@@ -70,7 +78,7 @@ class PostForm extends Component {
       <Card style={{ padding: 5, margin: 5 }}>
         <div
           style={{
-            paddingLeft: 16
+            paddingLeft: 5
           }}
         >
           <form
@@ -103,6 +111,10 @@ class PostForm extends Component {
               rows="4"
               value={this.state.body}
               onChange={this.handleChange('body')}
+              style={{
+                paddingTop: 10,
+                paddingBottom: 20
+              }}
             />
             <TextField
               required
@@ -163,10 +175,9 @@ class PostForm extends Component {
 function mapStateToProps({ posts, categories }, { match }) {
   return {
     post: posts.filter(post => post.id === match.params.postId)[0],
-    categories:
-      (categories && categories.length) > 0
-        ? categories.filter(category => category.path !== baseCategory.path)
-        : categories
+    categories: categories.filter(
+      category => category.path !== baseCategory.path
+    )
   };
 }
 
