@@ -22,7 +22,7 @@ export default function(state = [], action) {
     case DELETE_COMMENT:
       return state.map(post => {
         if (action.payload.parentId === post.id) {
-          post.numComments = post.numComments - 1;
+          post.commentCount = post.commentCount - 1;
           return post;
         } else {
           return post;
@@ -31,7 +31,7 @@ export default function(state = [], action) {
     case ADD_COMMENT:
       return state.map(post => {
         if (action.payload.parentId === post.id) {
-          post.numComments = post.numComments + 1;
+          post.commentCount = post.commentCount + 1;
           return post;
         } else {
           return post;

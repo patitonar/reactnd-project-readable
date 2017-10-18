@@ -114,7 +114,7 @@ class PostDetail extends Component {
                 <CommentForm post={post} />
               </Card>
               <Card style={{ padding: 5, margin: 5 }}>
-                <CardHeader title={`${post.numComments} comments`} />
+                <CardHeader title={`${post.commentCount} comments`} />
                 <CommentList
                   items={comments}
                   handleVote={this.handleCommentVote}
