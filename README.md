@@ -3,7 +3,7 @@
 ## Server
 
 ```sh
-cd server
+cd api-server
 npm install
 npm start
 ```
