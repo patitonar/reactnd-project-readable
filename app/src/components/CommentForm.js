@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { v4 } from 'uuid';
 import { connect } from 'react-redux';
-import { addComment, updateComment } from '../actions';
+import { addComment, updateComment } from '../actions/commentsActions';
 import PropTypes from 'prop-types';
 
 class CommentForm extends Component {

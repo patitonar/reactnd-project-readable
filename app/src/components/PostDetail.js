@@ -5,14 +5,12 @@ import Typography from 'material-ui/Typography';
 import VoteScore from './VoteScore';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import moment from 'moment';
+import { getPost, deletePost, votePost } from '../actions/postsActions';
 import {
-  getPost,
   fetchComments,
-  deletePost,
-  votePost,
   voteComment,
   deleteComment
-} from '../actions';
+} from '../actions/commentsActions';
 import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';

@@ -5,7 +5,7 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   ADD_POST
-} from '../actions';
+} from '../actions/types';
 
 export default function(state = [], action) {
   switch (action.type) {
